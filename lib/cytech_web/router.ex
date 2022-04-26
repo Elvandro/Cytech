@@ -20,6 +20,8 @@ defmodule CytechWeb.Router do
     get "/", PageController, :index
 
     live "/dashboard", DashboardLive
+    live "/login", LoginLive
+
   end
 
   # Other scopes may use custom stacks.
