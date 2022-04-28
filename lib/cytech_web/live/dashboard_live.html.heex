@@ -1,0 +1,20 @@
+<h1>Installations</h1>
+
+<table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Site Id</th>
+      </tr>
+    </thead>
+    <tbody id="installations">
+        <%= for item <- @installations do %>
+          <tr>
+            <td><%= item["name"]%></td>
+            <td><%= item["idSite"]%></td>
+
+
+          </tr>
+        <% end %>
+      </tbody>
+  </table>
