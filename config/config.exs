@@ -26,6 +26,13 @@ config :cytech, CytechWeb.Endpoint,
 # at the `config/runtime.exs`.
 config :cytech, Cytech.Mailer, adapter: Swoosh.Adapters.Local
 
+config :dart_sass,
+  version: "1.43.1",
+  default: [
+    args: ~w(css/app.scss ../priv/static/assets/app.css),
+    cd: Path.expand("../assets", __DIR__)
+  ]
+
 # Swoosh API client is needed for adapters other than SMTP.
 config :swoosh, :api_client, false
 

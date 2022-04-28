@@ -27,7 +27,7 @@ config :cytech, CytechWeb.Endpoint,
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
     esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
-  ]
+  ],
 
 # ## SSL Support
 #
@@ -52,6 +52,12 @@ config :cytech, CytechWeb.Endpoint,
 # If desired, both `http:` and `https:` keys can be
 # configured to run both http and https servers on
 # different ports.
+
+sass: [
+  DartSass,
+  :install_and_run,
+  [:default, ~w(--embed-source-map --source-map-urls=absolute --watch)]
+]
 
 # Watch static and templates for browser reloading.
 config :cytech, CytechWeb.Endpoint,
