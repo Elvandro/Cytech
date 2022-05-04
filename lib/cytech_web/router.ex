@@ -17,9 +17,10 @@ defmodule CytechWeb.Router do
   scope "/", CytechWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    # get "/", PageController, :index
+    live "/", LoginLive.Index, :index
 
-    live "/dashboard", DashboardLive
+    live "/home", DashboardLive.Index, :index
   end
 
   # Other scopes may use custom stacks.
