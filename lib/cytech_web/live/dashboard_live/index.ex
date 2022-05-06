@@ -2,13 +2,47 @@ defmodule CytechWeb.DashboardLive.Index do
   use CytechWeb, :live_view
 
   @impl true
+
   def mount(_params, _session, socket) do
-    data = authenticate_api()
-    {:ok, assign(socket, :installations, data)}
+    data = authenticate_api() |> destructure()
+
+    socket =
+      socket
+      |> assign(:installations, data)
+
+    {:ok, socket}
   end
 
-  def destructure(item) do
-    item["extended"]
+  def destructure(data) do
+    data
+    |> Enum.map(fn res ->
+      %{
+        name: res["name"],
+        id: res["idSite"],
+        extended_data: destructure_extended(res["extended"]),
+        last_timestamp: res["last_timestamp"] |> DateTime.from_unix!(:millisecond)
+      }
+    end)
+  end
+
+  def destructure_extended(item) do
+    item
+    |> Enum.map(fn item ->
+      %{
+        code: item["code"],
+        desc: item["description"],
+        format_value: item["formatWithUnit"],
+        value: item["formattedValue"],
+        raw_value: item["rawValue"],
+        time_stamp: item["timestamp"]
+      }
+    end)
+  end
+
+  def format_timestamp(time = nil), do: time
+
+  def format_timestamp(time = time) do
+    time |> DateTime.from_unix!(:millisecond)
   end
 
   def authenticate_api() do
@@ -71,6 +105,7 @@ defmodule CytechWeb.DashboardLive.Index do
     case HTTPoison.get(url, headers) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
         res = Poison.decode!(body)
+        res["records"] |> destructure() |> IO.inspect()
         res["records"]
 
       # IO.inspect(body)

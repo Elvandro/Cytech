@@ -192,27 +192,87 @@
                   </div>
                 </td>
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                  <%= item["name"]%>
+                  <%= item.name %>
                 </th>
+
                 <td class="px-6 py-4">
+                  <div>
+                    <%= for data <- item.extended_data do %>
+                    <%= if data.code == "bv" do %>
+                    <%= data.value%>
+                    <% else %>
+                    <% end %>
+                    <% end %>
+                  </div>
+
+                  <%= for data <- item.extended_data do %>
+                  <%= if data.code == "bs" do %>
+                  <%= data.value%>
+                  <% else %>
+                  <% end %>
+                  <% end %>
+                  <%= for data <- item.extended_data do %>
+                  <%= if data.code == "bst" do %>
+                  <%= data.value%>
+                  <% else %>
+                  <% end %>
+                  <% end %>
+                  <div>
+                    <%= for data <- item.extended_data do %>
+                    <%= if data.code == "bc" do %>
+                    <%= data.value%>
+                    <% else %>
+                    <% end %>
+                    <% end %>
+                  </div>
+                </td>
+                <td class="px-6 py-4">
+                  <%= for data <- item.extended_data do %>
+                  <%= if data.code == "solar_yield" do %>
+                  <%= data.value%>
+                  <% else %>
+                  <% end %>
+                  <% end %>
+                </td>
+                <td class="px-6 py-4">
+                  <%= for data <- item.extended_data do %>
+                  <%= if data.code == "consumption" do %>
+                  <%= data.value%>
+                  <% else %>
+                  <% end %>
+                  <% end %>
+                </td>
+                <td class="px-6 py-4">
+                  <%= for data <- item.extended_data do %>
+                  <%= if data.code == "from_to_grid" do %>
+                  <%= data.value%>
+                  <% else %>
+                  <% end %>
+                  <% end %>
+                </td>
+                <td class="px-6 py-4">
+                  <%= for data <- item.extended_data do %>
+                  <%= if data.code == "generator" do %>
+                  <%= data.value%>
+                  <% else %>
+                  <% end %>
+                  <% end %>
                 </td>
                 <td class="px-6 py-4">
                 </td>
                 <td class="px-6 py-4">
                 </td>
                 <td class="px-6 py-4">
-                </td>
-                <td class="px-6 py-4">
-                </td>
-                <td class="px-6 py-4">
-                </td>
-                <td class="px-6 py-4">
-                </td>
-                <td class="px-6 py-4">
+                  <%= for data <- item.extended_data do %>
+                  <%= if data.code == "Agl" do %>
+                  <%= data.value%>
+                  <% else %>
+                  <% end %>
+                  <% end %>
                 </td>
                 <td class="px-6 py-4 text-right">
                   <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                    <%= link "View", to: URI.parse("https://vrm.victronenergy.com/installation/#{item["idSite"]}/dashboard") %>
+                    <%= link "View", to: URI.parse("https://vrm.victronenergy.com/installation/#{item.id}/dashboard") %>
                   </a>
                 </td>
               </tr>
